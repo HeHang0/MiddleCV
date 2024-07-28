@@ -1,0 +1,58 @@
+﻿<ui:FluentWindow x:Class="MiddleCV.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"
+        xmlns:local="clr-namespace:MiddleCV"
+        mc:Ignorable="d"
+        Title="MiddleCV" Height="250" MinHeight="200" Width="500" MaxWidth="500" MinWidth="500"
+        ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+        ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        ExtendsContentIntoTitleBar="True"
+        WindowCornerPreference="Round"
+        WindowStartupLocation="CenterScreen">
+    <ui:FluentWindow.Resources>
+        <Style TargetType="ui:Button" BasedOn="{StaticResource DefaultUiButtonStyle}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="PressedForeground" Value="White" />
+        </Style>
+    </ui:FluentWindow.Resources>
+    <Grid x:Name="WinBackground">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="45" />
+        </Grid.RowDefinitions>
+        <Border x:Name="DragHelper" Visibility="Collapsed" Background="#01000000" Height="48"/>
+        <ui:TitleBar x:Name="TitleBar" Title="MiddleCV" CanMaximize="False" ShowMaximize="False" ShowMinimize="False">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon x:Name="TitleBarIcon"/>
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
+        <StackPanel Width="411" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top"  HorizontalAlignment="Center">
+            <ui:ToggleSwitch x:Name="StartUp" Margin="0 0 5 0" Width="40" Height="20" VerticalAlignment="Bottom" Checked="StartUp_Checked" Unchecked="StartUp_Checked"/>
+            <Label Content="开机启动" HorizontalAlignment="Left" VerticalAlignment="Bottom" Padding="0"/>
+            <ui:ToggleSwitch x:Name="RunCV" Margin="10 0 5 0" Width="40" Height="20" VerticalAlignment="Bottom" Checked="RunCV_Checked" Unchecked="RunCV_Checked"/>
+            <Label Content="运行" HorizontalAlignment="Left" VerticalAlignment="Bottom" Padding="0"/>
+            <ui:ToggleSwitch x:Name="SkipMiddle" Margin="10 0 5 0" Width="40" Height="20" VerticalAlignment="Bottom" />
+            <Label Content="屏蔽Middle键" HorizontalAlignment="Left" VerticalAlignment="Bottom" Padding="0"/>
+            <ui:ToggleSwitch x:Name="RunTopmost" Margin="10 0 5 0" Width="40" Height="20" VerticalAlignment="Bottom" Checked="RunTopmost_Checked" Unchecked="RunTopmost_Checked"/>
+            <Label Content="置顶" HorizontalAlignment="Left" VerticalAlignment="Bottom" Padding="0" />
+        </StackPanel>
+        <ComboBox Grid.Row="2" x:Name="RunMode" Height="35" Width="411"  VerticalContentAlignment="Bottom" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
+        <ui:TextBox Grid.Row="3" x:Name="CopyedText" IsReadOnly="True" MouseDoubleClick="CopyedText_MouseDoubleClick" Width="411" Margin="0 5"/>
+        <ui:Button Grid.Row="4" Appearance="Danger"  Height="30" Width="411" Margin="0 5 0 10"
+                       Content="退出" Click="Exit" HorizontalAlignment="Center" />
+        <tray:NotifyIcon
+            x:Name="TrayIcon"
+            Grid.Row="0"
+            FocusOnLeftClick="True"
+            MenuOnRightClick="True"
+            TooltipText="Wpf.Ui.Demo.Simple">
+        </tray:NotifyIcon>
+    </Grid>
+</ui:FluentWindow>
